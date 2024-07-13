@@ -22,7 +22,7 @@ def callback(request):
     token_info = sp_oauth.get_access_token(code)
     if 'access_token' in token_info:
         request.session['token_info'] = token_info
-        return redirect('http://localhost:5173/tracks')
+        return redirect('http://localhost:5173/playlists')
     else:
         return JsonResponse({'error': 'Access token not found or expired'}, status=400)
     
@@ -36,7 +36,7 @@ def get_playlists(request):
     else:
         return JsonResponse({'error': 'Access token not found'}, status=400)
 
-def tempo2(request):
+def get_tempo(request):
     token_info = request.session.get('token_info')
     
     if token_info and 'access_token' in token_info:
@@ -44,17 +44,13 @@ def tempo2(request):
             access_token = token_info['access_token']
             sp = spotipy.Spotify(auth=access_token)
 
-            # Default tempo range (example: 100-150 BPM)
             tempo_range = '100-150'
 
-            # Check if request includes a tempo range parameter
             if 'tempo_range' in request.GET:
                 tempo_range = request.GET['tempo_range']
 
-            # Split tempo range into min and max
             min_tempo, max_tempo = map(float, tempo_range.split('-'))
 
-            # Get user's saved tracks
             results = sp.current_user_saved_tracks(limit=10)
 
             tracks = []
@@ -62,12 +58,10 @@ def tempo2(request):
             for item in results['items']:
                 track = item['track']
 
-                # Retrieve audio features for the track
                 audio_features = sp.audio_features(track['id'])
 
                 if audio_features and len(audio_features) > 0 and 'tempo' in audio_features[0]:
                     tempo = audio_features[0]['tempo']
-                    # Check if tempo falls within the specified range
                     if min_tempo <= tempo <= max_tempo:
                         tracks.append({
                             'name': track['name'],
@@ -76,7 +70,6 @@ def tempo2(request):
                             'tempo': tempo
                         })
 
-            # Sort tracks by tempo (descending)
             tracks_sorted_by_tempo = sorted(tracks, key=lambda x: x['tempo'], reverse=True)
 
             return JsonResponse({'tracks': tracks_sorted_by_tempo})

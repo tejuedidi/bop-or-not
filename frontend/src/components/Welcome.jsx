@@ -1,4 +1,7 @@
 import React from 'react';
+import Button from '@mui/material/Button';
+
+import './Welcome.css';
 
 export default function Welcome() {
     const handleLogin = async () => {
@@ -6,9 +9,17 @@ export default function Welcome() {
     };
 
     return (
-        <>
-            <h1>Welcome</h1>
-            <button name="login" onClick={handleLogin}>Login with Spotify</button>
-        </>
+        <div classname="login">
+            <Button
+                variant="contained"
+                onClick={handleLogin}
+                sx={{
+                    backgroundColor: '#85B36B', color: '#386641',
+                    '&:hover': { backgroundColor: '#386641', color: '#85B36B' }
+                }}
+            >
+                Login with Spotify
+            </Button>
+        </div>
     );
 }

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
 
 export default function Playlists() {
     const [playlists, setPlaylists] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:8000/tracks/', {
+        fetch('http://localhost:8000/playlists/', {
             method: 'GET',
-            credentials: 'include',  // Ensure cookies (sessions) are sent
+            credentials: 'include',
         })
             .then(response => response.json())
             .then(data => {
@@ -27,9 +26,6 @@ export default function Playlists() {
                 {playlists.map(playlist => (
                     <li key={playlist.id}>{playlist.name}</li>
                 ))}
-            </ul>
-            <ul>
-                <Link to="/tempo2">See Tracks by Tempo2 </Link>
             </ul>
         </div>
     );
