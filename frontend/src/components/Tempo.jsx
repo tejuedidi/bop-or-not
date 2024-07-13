@@ -8,7 +8,7 @@ const Tempo2 = () => {
     const handleButtonClick = (tempoRange) => {
         setLoading(true); 
 
-        fetch(`http://localhost:8000/tempo2/?tempo_range=${tempoRange}`, {
+        fetch(`http://localhost:8000/tempo/?tempo_range=${tempoRange}`, {
             method: 'GET',
             credentials: 'include'
         })
