@@ -1,0 +1,20 @@
+.cam {
+    display: flex;
+    justify-content: center;
+}
+
+.but1 {
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.but2 {
+    display: flex;
+    justify-content: center;
+}
+
+.emo {
+    text-transform: capitalize;
+    text-align: center;
+}

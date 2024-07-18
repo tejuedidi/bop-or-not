@@ -18,10 +18,10 @@ export default function App() {
                         <Route path="/" element={<Welcome />} />
                         <Route path="/playlists" element={<Playlists />} />
                         <Route path="/tempo" element={<Tempo />} />
-                        {/* <Route path="/" element={<CustomWebcam />} /> */}
+                        <Route path="/analyze" element={<CustomWebcam />} />
                     </Routes>
                 </div>
-                <CustomWebcam />
+                {/* <CustomWebcam /> */}
             </>
         </Router>
     );

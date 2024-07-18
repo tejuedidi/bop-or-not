@@ -15,6 +15,9 @@ export default function Navbar() {
             <div className='navbar-item'>
                 <Link to="/tempo" className='navbar-link'>Tempo</Link>
             </div>
+            <div className='navbar-item'>
+                <Link to="analyze" className='navbar-link'>Analyze</Link>
+            </div>
         </div>
     );
 };
