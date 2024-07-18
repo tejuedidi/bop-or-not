@@ -4,6 +4,7 @@ import Welcome from "./components/Welcome";
 import Playlists from "./components/Playlists";
 import Tempo from "./components/Tempo";
 import Navbar from './components/Navbar';
+import CustomWebcam from './components/Webcam';
 
 import './App.css';
 
@@ -17,8 +18,10 @@ export default function App() {
                         <Route path="/" element={<Welcome />} />
                         <Route path="/playlists" element={<Playlists />} />
                         <Route path="/tempo" element={<Tempo />} />
+                        {/* <Route path="/" element={<CustomWebcam />} /> */}
                     </Routes>
                 </div>
+                <CustomWebcam />
             </>
         </Router>
     );

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 
-const Tempo2 = () => {
+const Tempo = () => {
     const [tracks, setTracks] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -43,4 +43,4 @@ const Tempo2 = () => {
     );
 };
 
-export default Tempo2;
+export default Tempo;

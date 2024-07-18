@@ -9,7 +9,7 @@ export default function Welcome() {
     };
 
     return (
-        <div classname="login">
+        <div className="login">
             <Button
                 variant="contained"
                 onClick={handleLogin}

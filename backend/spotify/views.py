@@ -79,3 +79,32 @@ def get_tempo(request):
 
     else:
         return JsonResponse({'error': 'Access token not found'}, status=400)
+
+
+import cv2
+import numpy as np
+import base64
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from deepface import DeepFace
+
+class AnalyzeImageView(APIView):
+    def post(self, request, *args, **kwargs):
+        image_data = request.data.get('image')
+        if image_data:
+            header, image_data = image_data.split(',')
+            image = np.frombuffer(base64.b64decode(image_data), dtype=np.uint8)
+            image = cv2.imdecode(image, cv2.IMREAD_COLOR)
+
+            try:
+                # Use DeepFace to analyze the image
+                analysis = DeepFace.analyze(img_path=image, actions=['emotion'], enforce_detection=False)
+                if analysis:
+                    dominant_emotion = analysis[0]['dominant_emotion']  # Correcting the index to handle the list
+                    return Response({'status': 'success', 'emotion': dominant_emotion})
+                else:
+                    return Response({'status': 'error', 'message': 'No face detected'}, status=400)
+            except Exception as e:
+                return Response({'status': 'error', 'message': str(e)}, status=500)
+        return Response({'status': 'error', 'message': 'Invalid image'}, status=400)
+    
